@@ -48,6 +48,9 @@ public class SetGame {
 		if(!areAllEqual(card1.shape, card2.shape, card3.shape) && !areAllDifferent(card1.shape, card2.shape, card3.shape)){
 			return false;
 		}
+		if(!areAllEqual(card1.shading, card2.shading, card3.shading) && !areAllDifferent(card1.shading, card2.shading, card3.shading)){
+			return false;
+		}
 		if(!areAllEqual(card1.color, card2.color, card3.color) && !areAllDifferent(card1.color, card2.color, card3.color)){
 			return false;
 		}
@@ -80,12 +83,12 @@ public class SetGame {
 	public static void main(String[] args) {
 		SetGame game = new SetGame();
 		game.addCards(new Card[] {
-				new Card(1, 2, 3),
-				new Card(2, 1, 2),
-				new Card(3, 3, 1),
-				new Card(2, 2, 1),
-				new Card(2, 2, 1),
-				new Card(2, 2, 1),
+				new Card(1, 2, 2, 3),
+				new Card(2, 1, 2, 2),
+				new Card(3, 3, 2, 1),
+				new Card(2, 2, 2, 1),
+				new Card(2, 2, 2, 1),
+				new Card(2, 2, 2, 1),
 			}
 		);
 
@@ -106,16 +109,18 @@ class Card{
 	//Internal representation of cards are integers for ease of calculation
 	public int number;
 	public int shape;
+	public int shading;
 	public int color;
 
-	public Card(int number, int shape, int color){
+	public Card(int number, int shape, int shading, int color){
 		this.number=number;
 		this.shape=shape;
+		this.shading=shading;
 		this.color=color;
 	}
 
 	@Override
 	public String toString(){
-		return "[" + number + " " + shape + " " + color + "]";
+		return "[" + number + " " + shape + " " + shading + " " + color + "]";
 	}
 }
