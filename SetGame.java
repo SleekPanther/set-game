@@ -4,7 +4,7 @@ public class SetGame {
 	private ArrayList<Card> cards = new ArrayList<Card>();
 	private ArrayList<Card[]> validSets = new ArrayList<Card[]>();
 
-	public void setCards(Card[] inputCards){
+	public void addCards(Card[] inputCards){
 		for(int i=0; i<inputCards.length; i++){
 			cards.add(inputCards[i]);
 		}
@@ -15,13 +15,12 @@ public class SetGame {
 	}
 
 	public void findSets(){
-		//Find all possible subsets of size 3 (n choose 3)
+		//Find all possible sets (n choose 3 combinations)
 		for(int i=0; i<cards.size(); i++){
 			for(int j=i+1; j<cards.size(); j++){
 				for(int k=j+1; k<cards.size(); k++){
-					Card[] tempSet = {cards.get(i), cards.get(j), cards.get(k)};
 					if(isSetValid(cards.get(i), cards.get(j), cards.get(k))){
-						validSets.add(tempSet);
+						validSets.add(new Card[]{cards.get(i), cards.get(j), cards.get(k)});
 					}
 				}
 			}
@@ -34,13 +33,14 @@ public class SetGame {
 			System.out.println("Valid Sets");
 			for(Card[] set : validSets){
 				for(Card card : set){
-					System.out.print(card);
+					System.out.print(card +" ");
 				}
 				System.out.println();
 			}
 		}
 	}
 
+	//Valid sets must either have all different numbers, shapes & colors, or all the same
 	private boolean isSetValid(Card card1, Card card2, Card card3){
 		if(!areAllEqual(card1.number, card2.number, card3.number) && !areAllDifferent(card1.number, card2.number, card3.number)){
 			return false;
@@ -62,6 +62,7 @@ public class SetGame {
 		return num1 != num2 && num2 != num3 && num1 != num3;
 	}
 
+	//Iterative implementation of n choose 3 for combinations
 	public void printCombinations(ArrayList<Card> cards){
 		int combinationCount=0;
 		for(int i=0; i<cards.size(); i++){
@@ -78,20 +79,22 @@ public class SetGame {
 
 	public static void main(String[] args) {
 		SetGame game = new SetGame();
-		game.setCards(new Card[] {
+		game.addCards(new Card[] {
 				new Card(1, 2, 3),
 				new Card(2, 1, 2),
 				new Card(3, 3, 1),
-				new Card(1, 1, 1)
-				// new Card(1, 1, 1), 
-				// new Card(2, 2, 2), 
-				// new Card(3, 3, 3), 
-				// new Card(4, 4, 4), 
-				// new Card(5, 5, 5)
+				new Card(2, 2, 1),
+				new Card(2, 2, 1),
+				new Card(2, 2, 1),
 			}
 		);
 
-		System.out.println("All Combinations");
+		System.out.println("Available Cards");
+		for(Card card : game.getCards()){
+			System.out.println(card);
+		}
+
+		System.out.println("\nAll Combinations");
 		game.printCombinations(game.getCards());
 		
 		System.out.println();
@@ -100,6 +103,7 @@ public class SetGame {
 }
 
 class Card{
+	//Internal representation of cards are integers for ease of calculation
 	public int number;
 	public int shape;
 	public int color;
@@ -108,10 +112,6 @@ class Card{
 		this.number=number;
 		this.shape=shape;
 		this.color=color;
-	}
-
-	public int[] getCardAsArray(){
-		return new int[]{number, shape, color};
 	}
 
 	@Override
