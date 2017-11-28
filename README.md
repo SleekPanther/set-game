@@ -1,5 +1,5 @@
 # Set Game 
-An algorithm to find valid sets in a given deck in the [Game Set](https://en.wikipedia.org/wiki/Set_(game)). This isn't a complete game, just the logic & algorithm to check if a valid set exists so that a hint can be provided.
+An algorithm to find valid sets in the [Game Set](https://en.wikipedia.org/wiki/Set_(game)). This isn't a complete game, just the logic & algorithm to check if a valid set exists so that a hint can be provided.
 
 # Java Version
 The more robust version is in [SetGame.java](SetGame.java)
